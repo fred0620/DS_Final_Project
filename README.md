@@ -8,12 +8,12 @@
 * **資料來源**：農產品批發市場交易行情站
   🔗 [https://amis.afa.gov.tw/veg/VegProdDayTransInfo.aspx](https://amis.afa.gov.tw/veg/VegProdDayTransInfo.aspx)
 * **收集期間**：2015/01/01 \~ 2025/04/30
-* **收集品項**：花椰菜（青梗）、萵苣、甜豌豆
+* **收集品項**：花椰菜（青梗）、茼蒿、甜豌豆
 
 | 品種  | 日資料筆數  | 週資料筆數 |
 | --- | ------ | ----- |
 | 花椰菜 | 14,983 | 764   |
-| 萵苣  | 4,091  | 764   |
+| 茼蒿  | 4,091  | 764   | 
 | 甜豌豆 | 4,228  | 764   |
 
 ---
@@ -29,7 +29,7 @@
 | 品種  | 觀測站地點                   |
 | --- | ----------------------- |
 | 花椰菜 | 方苑、鹿港、台中農改、北斗（以平均值整合）   |
-| 萵苣  | 水試臺西試驗場、臺大雲林校區、麥寮合作社、北斗 |
+| 茼蒿  | 水試臺西試驗場、臺大雲林校區、麥寮合作社、北斗 |
 | 甜豌豆 | 鹿港、臺中農改、王功漁港、北斗、芳苑      |
 
 ---
@@ -46,7 +46,7 @@
 | ---------- | ----------------------------------------------------------------------------------------- |
 | 食農教育資訊整合平台 | [https://fae.moa.gov.tw/map/county\_agri.php](https://fae.moa.gov.tw/map/county_agri.php) |
 | 花椰菜產地說明    | [台中區農改場](https://www.tcdares.gov.tw/theme_data.php?theme=news&sub_theme=event&id=13643)   |
-| 萵苣產地說明     | [Instagram 圖文](https://www.instagram.com/p/CGkAWf1n_M4/)                                  |
+| 茼蒿產地說明     | [美食網](https://food.ltn.com.tw/article/1282)                                  |
 | 豌豆產地報導     | [農傳媒](https://www.agriharvest.tw/archives/73963)                                          |
 
 ---
