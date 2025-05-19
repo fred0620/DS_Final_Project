@@ -95,3 +95,100 @@
 - `data.ipynb`：資料整合與處理過程紀錄
 - `summary_merged_daily_lagged.csv`：每日整合資料摘要
 - `summary_merged_weekly_lagged.csv`：每週整合資料摘要
+
+---
+
+---
+
+## 🖼️ 圖像成果展示
+
+本研究依據各模型預測與區域市場資料，繪製多張可視化圖表，輔助理解價格波動趨勢與模型效果。
+
+---
+
+### 📍 每週市場價格趨勢圖
+
+觀察各地市場（永靖鄉、溪湖鎮、西螺鎮）在不同週次的實際價格波動情形：
+
+#### 永靖鄉
+![512永靖鄉每週批發價格趨勢圖](image/512永靖鄉每週批發價格趨勢圖.jpg)
+
+#### 溪湖鎮
+![514溪湖鎮每週批發價格趨勢圖](image/514溪湖鎮每週批發價格趨勢圖.jpg)
+
+#### 西螺鎮
+![648西螺鎮每週批發價格趨勢圖](image/648西螺鎮每週批發價格趨勢圖.jpg)
+
+#### 各市場平均價格比較
+![不同市場每周平均價格趨勢](image/不同市場每周平均價格趨勢.jpg)  
+![不同市場每周平均價格趨勢2](image/不同市場每周平均價格趨勢2.jpg)
+
+---
+
+### 🔧 模型預測結果圖
+
+#### 🧠 XGBoost 預測結果（各市場）
+
+##### 永靖鄉
+![512_XGBoost](image/xgboost/512市場價格預測_xgboost.jpg)
+
+##### 溪湖鎮
+![514_XGBoost](image/xgboost/514市場價格預測_xgboost.jpg)
+
+##### 西螺鎮
+![648_XGBoost](image/xgboost/648市場價格預測_xgboost.jpg)
+
+---
+
+#### 📈 ARIMA 預測與診斷圖
+
+##### 永靖鄉（512）
+![512_ARIMA](image/arima/512市場價格預測_arima.jpg)  
+![512_fit_price](image/arima/512fit%20data%20price趨勢.jpg)  
+![512_fit_log](image/arima/512fit%20data%20log%28price%29趨勢.jpg)  
+![512_acf](image/arima/512acf.jpg)  
+![512_pacf](image/arima/512pacf.jpg)  
+![512_Ljungbox](image/arima/512Ljungbox%20test.jpg)
+
+---
+
+##### 溪湖鎮（514）
+![514_ARIMA](image/arima/514市場價格預測_arima.jpg)  
+![514_fit_price](image/arima/514fit%20data%20price趨勢.jpg)  
+![514_fit_log](image/arima/514fit%20data%20log%28price%29趨勢.jpg)  
+![514_acf](image/arima/514acf.jpg)  
+![514_pacf](image/arima/514pacf.jpg)  
+![514_Ljungbox](image/arima/514Ljungbox%20test.jpg)
+
+---
+
+##### 西螺鎮（648）
+![648_ARIMA](image/arima/648市場價格預測_arima.jpg)  
+![648_fit_price](image/arima/648fit%20data%20price趨勢.jpg)  
+![648_fit_log](image/arima/648fit%20data%20log%28price%29趨勢.jpg)  
+![648_acf](image/arima/648acf.jpg)  
+![648_pacf](image/arima/648pacf.jpg)  
+![648_Ljungbox](image/arima/648Ljungbox%20test.jpg)
+
+---
+
+### 📂 圖像儲存路徑與結構
+
+```css
+image/
+├── 512永靖鄉每週批發價格趨勢圖.jpg
+├── 514溪湖鎮每週批發價格趨勢圖.jpg
+├── 648西螺鎮每週批發價格趨勢圖.jpg
+├── 不同市場每周平均價格趨勢.jpg
+├── 不同市場每周平均價格趨勢2.jpg
+├── xgboost/
+│   ├── 512市場價格預測_xgboost.jpg
+│   ├── 514市場價格預測_xgboost.jpg
+│   └── 648市場價格預測_xgboost.jpg
+└── arima/
+    ├── [512系列圖]
+    ├── [514系列圖]
+    └── [648系列圖]
+```
+
+> 📌 本資料夾圖片為模型訓練與預測成果、各市場實際價格走勢視覺化之重要補充，建議搭配資料分析結果一同參閱。
