@@ -153,7 +153,7 @@ cat("最小誤差:", min(results$abs_error), "\n")
 
 layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))  
 par(mar = c(5, 4, 4, 2))  
-ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(10,80), ylab='price', main = "「512 永靖鄉」市場價格預測")
+ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(0,90), ylab='price', main = "「512 永靖鄉」市場價格預測")
 lines(29+(1:nrow(test_data)), results$predicted, col=2, lty = 2)
 
 lines(29+(1:nrow(test_data)), results$actual, col=4)
@@ -296,7 +296,7 @@ cat("最小誤差:", min(results$abs_error), "\n")
 
 layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))  
 par(mar = c(5, 4, 4, 2))  
-ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(10,115), ylab='price', main = "「514 溪湖鎮」市場價格預測")
+ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(0,120), ylab='price', main = "「514 溪湖鎮」市場價格預測")
 lines(29+(1:nrow(test_data)), results$predicted, col=2, lty = 2)
 lines(29+(1:nrow(test_data)), results$actual, col=4)
 
@@ -437,7 +437,7 @@ cat("最小誤差:", min(results$abs_error), "\n")
 
 layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))  
 par(mar = c(5, 4, 4, 2))
-ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(10,150), ylab='price', main = "「648 西螺鎮」市場價格預測")
+ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(0,150), ylab='price', main = "「648 西螺鎮」市場價格預測")
 lines(29+(1:nrow(test_data)), results$predicted, col=2, lty = 2)
 lines(29+(1:nrow(test_data)), results$actual, col=4)
 par(mar = c(0, 0, 2, 0))
