@@ -77,6 +77,13 @@ sweet_pea_cleaned <- sweet_pea_cleaned %>%
 unique_markets <- unique(sweet_pea_cleaned$market_name)
 cat("數據集中的市場:", paste(unique_markets, collapse=", "), "\n")
 
+# 檢查豐原市場數據量
+if("豐原區" %in% unique_markets) {
+  cat("豐原區數據量:", nrow(sweet_pea_cleaned %>% filter(market_name == "豐原區")), "\n")
+} else {
+  cat("警告: 數據中沒有豐原區市場\n")
+}
+
 # 清理天氣數據
 weather_cleaned <- weather_daily_raw %>%
   rename(date = `觀測時間`) %>%
@@ -100,7 +107,8 @@ weather_cleaned <- weather_daily_raw %>%
 merged_data <- left_join(sweet_pea_cleaned, weather_cleaned, by = "date")
 
 # --- 3. 探索性分析與特徵工程 ---
-target_markets <- c("台中市", "溪湖鎮")
+# 新增豐原區到目標市場
+target_markets <- c("台中市", "溪湖鎮", "豐原區")
 model_results_list <- list()
 
 for (market_n in target_markets) {
@@ -113,6 +121,11 @@ for (market_n in target_markets) {
   
   # 基本統計資訊
   cat("市場數據行數:", nrow(market_data), "\n")
+  if(nrow(market_data) == 0) {
+    cat("警告: 此市場沒有數據，跳過處理\n")
+    next
+  }
+  
   cat("日期範圍:", min(market_data$date, na.rm=TRUE), "到", max(market_data$date, na.rm=TRUE), "\n")
   
   # 添加特徵
@@ -203,7 +216,8 @@ for (market_n in target_markets) {
   # 評估
   rmse <- rmse(test_data$avg_price, test_data$ranger_pred_orig)
   mae <- mae(test_data$avg_price, test_data$ranger_pred_orig)
-  cat(paste("Ranger模型 RMSE:", round(rmse, 2), "MAE:", round(mae, 2), "\n"))
+  mape <- mean(abs((test_data$avg_price - test_data$ranger_pred_orig) / test_data$avg_price), na.rm = TRUE) * 100
+  cat(paste("Ranger模型 RMSE:", round(rmse, 2), "MAE:", round(mae, 2), "MAPE:", round(mape, 2), "%\n"))
   
   # 特徵重要性
   imp <- ranger::importance(ranger_model)
@@ -217,7 +231,8 @@ for (market_n in target_markets) {
       model = ranger_model,
       importance = imp,
       rmse = rmse,
-      mae = mae
+      mae = mae,
+      mape = mape
     ),
     data_splits = list(
       train_data_for_plotting = train_data,
@@ -243,7 +258,7 @@ for (market_n in target_markets) {
   ts.plot(c(recent_train, rep(NA, nrow(test_data))), 
           ylim = c(0, y_max),
           ylab = 'price', 
-          main = paste0("「", market_code, " ", market_n, "」市場價格預測"))
+          main = paste0("「", market_code, " ", market_n, "」甜豌豆市場價格預測"))
   
   # 添加預測線和實際值線
   lines(length(recent_train) + (1:nrow(test_data)), test_data$ranger_pred_orig, col = "red", lty = 2, lwd = 1.5)
@@ -257,11 +272,34 @@ for (market_n in target_markets) {
          col = c("red", "blue"), lty = c(2, 1), lwd = c(1.5, 1.5), bty = "n")
   
   # 保存圖片
-  dev.copy(png, filename = here("plots/predictions", paste0(market_code, "市場價格預測_ranger.png")),
+  dev.copy(png, filename = here("plots/predictions", paste0(market_code, "甜豌豆市場價格預測_ranger.png")),
            width = 800, height = 500, res = 100)
   dev.off()
   
   cat(paste("預測圖已儲存:", market_n, "\n"))
+  
+  # 添加特徵重要性視覺化
+  importance_df <- data.frame(
+    Feature = names(imp),
+    Importance = imp
+  ) %>% arrange(desc(Importance))
+  
+  top_n_features <- min(10, nrow(importance_df))
+  importance_plot_data <- head(importance_df, top_n_features)
+  
+  png(filename = here("plots/predictions", paste0(market_code, "甜豌豆特徵重要性.png")),
+      width = 800, height = 500, res = 100)
+  
+  par(mar = c(5, 10, 4, 2))  # 調整邊距以容納長特徵名稱
+  barplot(importance_plot_data$Importance, 
+          names.arg = importance_plot_data$Feature,
+          horiz = TRUE, 
+          las = 1,
+          main = paste0(market_n, " 甜豌豆價格預測特徵重要性"),
+          xlab = "重要性分數")
+  
+  dev.off()
+  cat(paste("特徵重要性圖已儲存:", market_n, "\n"))
 }
 
 # 儲存模型結果和合併數據以供後續使用
