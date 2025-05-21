@@ -5,10 +5,9 @@ library(here)
 library(ranger)
 library(Metrics)
 library(zoo)
-library(skimr)
 
 # 創建資料夾
-dirs <- c("data_processed", "plots", "models_saved")
+dirs <- c("data_processed", "plots", "plots/predictions", "models_saved")
 for(dir in dirs) {
   if(!dir.exists(here(dir))) dir.create(here(dir), recursive = TRUE)
 }
@@ -226,93 +225,46 @@ for (market_n in target_markets) {
     )
   )
   
-  # --- 5. 繪製預測圖 (優化版，更接近組員風格) ---
-  # 設定布局：主圖和圖例
+  # --- 5. 繪製預測圖 (與組員格式一致) ---
+  # 獲取市場代碼
+  market_code <- unique(as.character(train_data$market_code))[1]
+  
+  # 繪製預測圖
   layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))
   par(mar = c(5, 4, 4, 2))
   
-  # 製作接近組員圖表的顯示
-  # 1. 獲取市場代碼以添加到標題
-  market_code <- unique(as.character(train_data$market_code))[1] # 獲取實際市場代碼
-  plot_title <- paste0("「", market_code, " ", market_n, "」市場價格預測")
-  
-  # 2. 準備繪圖數據（包含更多訓練數據點）
-  # 取全部訓練數據而非僅末尾進行繪製
-  all_train <- train_data$avg_price
-  
-  # 3. 建立ARIMA風格的置信區間
-  # 根據預測值的波動性計算置信區間
-  price_sd <- sd(test_data$avg_price, na.rm=TRUE)
-  confidence_width <- 1.96 * price_sd  # 95% 置信區間
-  test_data$upper_ci <- test_data$ranger_pred_orig + confidence_width
-  test_data$lower_ci <- test_data$ranger_pred_orig - confidence_width
-  test_data$lower_ci <- ifelse(test_data$lower_ci < 0, 0, test_data$lower_ci)  # 確保下限不小於0
-  
-  # 4. 設定適當的Y軸範圍
-  y_max <- max(c(all_train, test_data$avg_price, test_data$upper_ci), na.rm=TRUE) * 1.1
-  
-  # 5. 繪製主圖 - 先繪製訓練數據（黑色線）
-  plot(1:length(all_train), all_train, 
-       type="l", col="black", 
-       xlim=c(1, length(all_train) + nrow(test_data)),
-       ylim=c(0, y_max),
-       xlab="Time", ylab="price",
-       main=plot_title)
-  
-  # 6. 添加測試集預測線（紅色實線）、實際線（藍色實線）和置信區間（綠色虛線）
-  lines(length(all_train) + (1:nrow(test_data)), test_data$ranger_pred_orig, col="red", lwd=1.5, lty=1)
-  lines(length(all_train) + (1:nrow(test_data)), test_data$avg_price, col="blue", lwd=1)
-  
-  # 添加置信區間
-  lines(length(all_train) + (1:nrow(test_data)), test_data$upper_ci, col="green3", lty=2)
-  lines(length(all_train) + (1:nrow(test_data)), test_data$lower_ci, col="green3", lty=2)
-  
-  # 7. 添加圖例（右側）
-  par(mar = c(0, 0, 2, 0))
-  plot.new()
-  legend("center", inset = c(0, 0), xpd = TRUE,
-         legend = c("Forecast", "Actual", "95% CI"),
-         col = c("red", "blue", "green3"), 
-         lty = c(1, 1, 2),
-         bty = "n")
-  
-  # 8. 儲存圖片
-  dev.copy(png, filename = here("plots", paste0("sweet_pea_pred_", gsub(" ","_",market_n), "_v3.png")),
-           width = 800, height = 600, res=100)
-  dev.off()
-  
-  # 9. 再次繪製一個沒有置信區間的版本 (對應前三張圖)
-  layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))
-  par(mar = c(5, 4, 4, 2))
-  
-  # 取最近30個訓練數據點進行繪製
+  # 僅選擇最近30個訓練數據點（與組員圖表一致）
   recent_train <- tail(train_data$avg_price, 30)
   
-  # 繪製基本圖形 - 較短的訓練數據
+  # 設定Y軸範圍
+  y_max <- max(c(recent_train, test_data$avg_price, test_data$ranger_pred_orig), na.rm=TRUE) * 1.1
+  
+  # 繪製基本圖形
   ts.plot(c(recent_train, rep(NA, nrow(test_data))), 
           ylim = c(0, y_max),
           ylab = 'price', 
-          main = plot_title)
+          main = paste0("「", market_code, " ", market_n, "」市場價格預測"))
   
   # 添加預測線和實際值線
-  lines(length(recent_train) + (1:nrow(test_data)), test_data$ranger_pred_orig, col = 2, lty = 2, lwd=1.5)
-  lines(length(recent_train) + (1:nrow(test_data)), test_data$avg_price, col = 4, lwd=1)
+  lines(length(recent_train) + (1:nrow(test_data)), test_data$ranger_pred_orig, col = "red", lty = 2, lwd = 1.5)
+  lines(length(recent_train) + (1:nrow(test_data)), test_data$avg_price, col = "blue", lwd = 1.5)
   
   # 添加圖例
   par(mar = c(0, 0, 2, 0))
   plot.new()
   legend("center", inset = c(0, 0), xpd = TRUE,
          legend = c("Forecast", "Actual"),
-         col = c(2, 4), lty = c(2, 1), bty = "n")
+         col = c("red", "blue"), lty = c(2, 1), lwd = c(1.5, 1.5), bty = "n")
   
-  # 儲存簡化版圖片
-  dev.copy(png, filename = here("plots", paste0("sweet_pea_pred_simple_", gsub(" ","_",market_n), ".png")),
-           width = 800, height = 600, res=100)
+  # 保存圖片
+  dev.copy(png, filename = here("plots/predictions", paste0(market_code, "市場價格預測_ranger.png")),
+           width = 800, height = 500, res = 100)
   dev.off()
   
   cat(paste("預測圖已儲存:", market_n, "\n"))
 }
 
-# 儲存模型結果
+# 儲存模型結果和合併數據以供後續使用
 saveRDS(model_results_list, file = here("models_saved", "sweet_pea_model_results.rds"))
-cat("\n甜豌豆價格預測完成！\n")
+saveRDS(merged_data, file = here("data_processed", "sweet_pea_merged_data.rds"))
+cat("\n甜豌豆價格預測模型訓練和預測圖生成完成！\n")
