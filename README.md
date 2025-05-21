@@ -196,18 +196,33 @@
 
 #### 🌲 Ranger 預測結果圖
 
-##### 台中市（400）
+##### 【甜豌豆】台中市（400）
 ![400甜豌豆市場價格預測_ranger](https://github.com/user-attachments/assets/2ed9e4f2-44e4-4d83-824c-33adb5893b90)
 
 ---
 
-##### 豐原區（420）
+##### 【甜豌豆】豐原區（420）
 ![420甜豌豆市場價格預測_ranger](https://github.com/user-attachments/assets/0643e578-9304-4eae-99dc-2e72955bf14c)
 
 ---
 
-##### 溪湖鎮（514）
+##### 【甜豌豆】溪湖鎮（514）
 ![514甜豌豆市場價格預測_ranger](https://github.com/user-attachments/assets/ffb6fbc2-eb04-4958-9176-477b10da8c21)
+
+---
+
+##### 【茼蒿】台中市（400）
+![400台中市茼蒿市場價格預測_ranger](https://github.com/user-attachments/assets/f6ada0f2-e82a-4f57-8a58-8af43958647b)
+
+---
+
+##### 【茼蒿】豐原區（420）
+![420豐原區茼蒿市場價格預測_ranger](https://github.com/user-attachments/assets/bdd61acc-dad3-49cb-8be1-c1433abbcae8)
+
+---
+
+##### 【茼蒿】西螺鎮（648）
+![648西螺鎮茼蒿市場價格預測_ranger](https://github.com/user-attachments/assets/68ac926c-0cad-49af-ab37-7671f212e1d8)
 
 ---
 
@@ -231,7 +246,10 @@ image/
 └── ranger/
     ├── 400台中市甜豌豆市場價格預測_ranger.jpg
     ├── 420豐原區甜豌豆市場價格預測_ranger.jpg
-    └── 514溪湖鎮甜豌豆市場價格預測_range.jpg
+    ├── 514溪湖鎮甜豌豆市場價格預測_range.jpg
+    ├── 400台中市茼蒿市場價格預測_ranger.jpg
+    ├── 420豐原區茼蒿市場價格預測_ranger.jpg
+    └── 648西螺鎮茼蒿市場價格預測_range.jpg
 ```
 
 > 📌 本資料夾圖片為模型訓練與預測成果、各市場實際價格走勢視覺化之重要補充，建議搭配資料分析結果一同參閱。
