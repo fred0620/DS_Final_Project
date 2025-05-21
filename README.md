@@ -262,6 +262,31 @@
 
 ---
 
+##### 【花椰菜】台中市（400）
+![400台中市花椰菜市場價格預測_ranger](https://github.com/user-attachments/assets/322ca71d-0569-4bb5-9de3-27d9a164cca4)
+
+---
+
+##### 【花椰菜】豐原區（420）
+![420豐原區花椰菜市場價格預測_ranger](https://github.com/user-attachments/assets/ef5eedd7-62ab-4efd-908d-3b42be8d5510)
+
+---
+
+##### 【花椰菜】西螺鎮（648）
+![648西螺鎮花椰菜市場價格預測_ranger](https://github.com/user-attachments/assets/9ac700b2-e00e-4351-a50f-e29685c85c3f)
+
+---
+
+##### 【花椰菜】溪湖鎮（648）
+![514溪湖鎮花椰菜市場價格預測_ranger](https://github.com/user-attachments/assets/b47f43bb-5ffb-4d63-8c41-a8c0d506ba5e)
+
+---
+
+##### 【花椰菜】永靖鄉（648）
+![512永靖鄉花椰菜市場價格預測_ranger](https://github.com/user-attachments/assets/a1b00f17-b16a-4d47-8bee-8b2876e49ea0)
+
+---
+
 ### 📂 圖像儲存路徑與結構
 
 ```css
