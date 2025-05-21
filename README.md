@@ -197,12 +197,17 @@
 #### 🌲 Ranger 預測結果圖
 
 ##### 台中市（400）
-![400市場價格預測_ranger](https://github.com/user-attachments/assets/b7c78d36-b849-468e-a074-4b20f1a71690)
+![400甜豌豆市場價格預測_ranger](https://github.com/user-attachments/assets/2ed9e4f2-44e4-4d83-824c-33adb5893b90)
+
+---
+
+##### 豐原區（420）
+![420甜豌豆市場價格預測_ranger](https://github.com/user-attachments/assets/0643e578-9304-4eae-99dc-2e72955bf14c)
 
 ---
 
 ##### 溪湖鎮（514）
-![514市場價格預測_ranger](https://github.com/user-attachments/assets/61f48cd2-1099-48bf-a31d-140fca00bd1e)
+![514甜豌豆市場價格預測_ranger](https://github.com/user-attachments/assets/ffb6fbc2-eb04-4958-9176-477b10da8c21)
 
 ---
 
@@ -224,8 +229,9 @@ image/
 │   ├── [514系列圖]
 │   └── [648系列圖]
 └── ranger/
-    ├── 400台中市場價格預測_ranger.jpg
-    └── 514溪湖鎮市場價格預測_range.jpg
+    ├── 400台中市甜豌豆市場價格預測_ranger.jpg
+    ├── 420豐原區甜豌豆市場價格預測_ranger.jpg
+    └── 514溪湖鎮甜豌豆市場價格預測_range.jpg
 ```
 
 > 📌 本資料夾圖片為模型訓練與預測成果、各市場實際價格走勢視覺化之重要補充，建議搭配資料分析結果一同參閱。
