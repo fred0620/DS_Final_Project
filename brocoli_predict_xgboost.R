@@ -151,19 +151,14 @@ cat("平均絕對百分比誤差 (MAPE):", mean(abs(results$error_percent)), "%\
 cat("最大誤差:", max(results$abs_error), "\n")
 cat("最小誤差:", min(results$abs_error), "\n")
 
-layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))  
-par(mar = c(5, 4, 4, 2))  
-ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(0,90), ylab='price', main = "「512 永靖鄉」市場價格預測")
-lines(29+(1:nrow(test_data)), results$predicted, col=2, lty = 2)
 
-lines(29+(1:nrow(test_data)), results$actual, col=4)
-
-par(mar = c(0, 0, 2, 0))
-plot.new() 
-legend("center", inset = c(0, 0), xpd = TRUE,
+ts.plot(c(tail(y_val, 20), rep(NA,nrow(test_data))), ylim=c(0,90), ylab='價格（元/公斤）', main = "「512 永靖鄉」市場價格預測")
+lines(20+(1:nrow(test_data)), results$predicted, col=2, lty = 1)
+lines(20+(1:nrow(test_data)), results$actual, col=4)
+legend("topright", inset = c(0, 0), xpd = TRUE,
        legend = c("Forecast", "Actual"),
-       col = c(2, 4), lty = c(2, 1), bty = "n")
-dev.off()
+       col = c(2, 4), lty = c(1, 1), bty = "n", cex=0.8)
+
 #####514 溪湖鎮#####
 
 # 篩選市場
@@ -293,19 +288,15 @@ cat("平均絕對誤差 (MAE):", mean(results$abs_error), "\n")
 cat("平均絕對百分比誤差 (MAPE):", mean(abs(results$error_percent)), "%\n")
 cat("最大誤差:", max(results$abs_error), "\n")
 cat("最小誤差:", min(results$abs_error), "\n")
+ 
+ts.plot(c(tail(y_val, 20), rep(NA,nrow(test_data))), ylim=c(0,120), ylab='價格（元/公斤）', main = "「514 溪湖鎮」市場價格預測")
+lines(20+(1:nrow(test_data)), results$predicted, col=2, lty = 1)
+lines(20+(1:nrow(test_data)), results$actual, col=4)
 
-layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))  
-par(mar = c(5, 4, 4, 2))  
-ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(0,120), ylab='price', main = "「514 溪湖鎮」市場價格預測")
-lines(29+(1:nrow(test_data)), results$predicted, col=2, lty = 2)
-lines(29+(1:nrow(test_data)), results$actual, col=4)
-
-par(mar = c(0, 0, 2, 0))
-plot.new() 
-legend("center", inset = c(0, 0), xpd = TRUE,
+legend("topright", inset = c(0, 0), xpd = TRUE,
        legend = c("Forecast", "Actual"),
-       col = c(2, 4), lty = c(2, 1), bty = "n")
-dev.off()
+       col = c(2, 4), lty = c(1, 1), bty = "n", cex = 0.8)
+
 #####648 西螺鎮#####
 # 篩選市場
 df_market <- cauliflower_data %>%
@@ -435,14 +426,10 @@ cat("平均絕對百分比誤差 (MAPE):", mean(abs(results$error_percent)), "%\
 cat("最大誤差:", max(results$abs_error), "\n")
 cat("最小誤差:", min(results$abs_error), "\n")
 
-layout(matrix(c(1, 2), nrow = 1), widths = c(5, 1))  
-par(mar = c(5, 4, 4, 2))
-ts.plot(c(tail(y_val, 29), rep(NA,nrow(test_data))), ylim=c(0,150), ylab='price', main = "「648 西螺鎮」市場價格預測")
-lines(29+(1:nrow(test_data)), results$predicted, col=2, lty = 2)
-lines(29+(1:nrow(test_data)), results$actual, col=4)
-par(mar = c(0, 0, 2, 0))
-plot.new() 
-legend("center", inset = c(0, 0), xpd = TRUE,
+ts.plot(c(tail(y_val, 20), rep(NA,nrow(test_data))), ylim=c(0,150), ylab='價格（元/公斤）', main = "「648 西螺鎮」市場價格預測")
+lines(20+(1:nrow(test_data)), results$predicted, col=2, lty = 1)
+lines(20+(1:nrow(test_data)), results$actual, col=4)
+legend("topright", inset = c(0, 0), xpd = TRUE,
        legend = c("Forecast", "Actual"),
-       col = c(2, 4), lty = c(2, 1), bty = "n")
-dev.off()
+       col = c(2, 4), lty = c(1, 1), bty = "n", cex = 0.8)
+
